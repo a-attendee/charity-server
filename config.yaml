@@ -1,0 +1,12 @@
+env: "dev"
+
+storage_path: "./api.db"
+
+http_server:
+  address: "localhost"
+  port: 3000
+  request_timeout: 4s
+  request_constraints:
+    max_requests: 20
+    max_requests_experation: 30s
+
