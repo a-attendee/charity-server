@@ -1,19 +1,20 @@
 package models
 
 import (
-	"database/sql"
+	"time"
 
+	"github.com/google/uuid"
 )
 
-type User struct {
-    ID uint `gorm: "primaryKey"`
-    
-    FirstName string        `json: "first_name"`
-    LastName string         `json: "last_name"`
-    Email sql.NullString    `json: "email"`
-    Money int               `json: "money"`
+// This file contains models for GORM //
+// This models is going to be used to create tables in database //
 
-    FundraisingCampaigns []FundraisingCampaign `gorm: "many2many:user_fundraising_campaign; foreignKey:id; References:ID"`
-    
-    Projects []Project `gorm: "many2many:user_projects; foreignKey:id References:ID"`
+// This is the basic user representing fields that every user must have //
+type User struct {
+    ID  uuid.UUID `gorm: "primaryKey"` 
+    FirstName string
+    LastName string
+    Email   string
+    CreatedAt    time.Time
+    UpdatedAt    time.Time
 }
