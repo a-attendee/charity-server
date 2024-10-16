@@ -27,13 +27,21 @@ func InitDB() {
         os.Exit(2)
     }
 
-    db.AutoMigrate(
+    err = db.AutoMigrate(
                     &models.User{}, 
-                    &models.Organization{}, 
-                    &models.FundraisingCampaign{}, 
+                    &models.Admin{},
                     &models.Project{},
-                )
+     //               &models.Donater{},
+     //               &models.Organizaion{},
+     //               &models.HistoryDonations{},
+    )
+
+    if err != nil {
+        db.Logger.Error(nil, "Failed to connect to the database!\n", err.Error())
+        os.Exit(2)
+
+    }
     Database = DBInstance{Db: db}
-    
+
     db.Logger.Info(nil, "Connected to the database: success!")
 }
